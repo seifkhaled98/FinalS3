@@ -1,3 +1,4 @@
+import org.example.Excelreader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -26,11 +27,13 @@ public class register {
         Assert.assertEquals(title,"Automation Exercise");
     }
     @Test(description = "Verify 'New User Signup!' is visible" , priority = 1)
-    public void textvisible(){
+    public void textvisible() throws IOException {
         home.clickSignup();
         login = new Login(driver);
         Assert.assertEquals(login.getNewUser(),"New User Signup!");
-        login.submitRegister("saif","Saif@gmail.com");
+        String username = Excelreader.getCellData("E:\\DEPI R3\\ONL_S3\\FinalS3\\Book1.xlsx","Sheet1",1,0);
+        String email = Excelreader.getCellData("E:\\DEPI R3\\ONL_S3\\FinalS3\\Book1.xlsx","Sheet1",1,1);
+        login.submitRegister(username,email);
 
     }
     @Test(description = "success register" , priority = 2)
